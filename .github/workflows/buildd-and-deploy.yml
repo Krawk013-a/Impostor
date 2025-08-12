@@ -1,0 +1,72 @@
+# Nome do Workflow que aparecerá na aba "Actions" do GitHub
+name: Build and Deploy to GitHub Pages
+
+# Gatilhos: Quando esta Action deve rodar?
+on:
+  # Roda quando você faz um 'push' para a branch 'main'
+  push:
+    branches: [ "main" ]
+  # Permite que você rode este workflow manualmente na aba Actions
+  workflow_dispatch:
+
+# Permissões necessárias para o workflow fazer o deploy
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Define as tarefas (jobs) que serão executadas
+jobs:
+  # Tarefa 1: Construir o projeto (o "build")
+  build:
+    runs-on: ubuntu-latest # Usa uma máquina virtual Linux (Ubuntu)
+    steps:
+      # 1. Baixa o código do seu repositório para a máquina virtual
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Configura o ambiente Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Especifique a versão do Node que seu projeto usa
+          cache: 'npm' # Habilita o cache para acelerar instalações futuras
+
+      # 3. Instala as dependências do projeto
+      - name: Install dependencies
+        run: npm ci # 'ci' é geralmente mais rápido e seguro para automação que 'install'
+
+      # 4. RODA O COMANDO DE BUILD! (Esta é a resposta para sua pergunta)
+      - name: Build project
+        run: npm run build # <<< AQUI ESTÁ O COMANDO DE BUILD
+        # Se seu projeto precisa de variáveis de ambiente no build, defina-as aqui
+        # env:
+        #   REACT_APP_API_URL: ${{ secrets.API_URL }}
+
+      # 5. Prepara os arquivos de build para serem enviados ao GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 6. Faz o upload dos arquivos da pasta de build como um "artefato"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Caminho para a pasta que o comando 'npm run build' gera
+          path: './build' # Mude para './dist' se seu projeto gera uma pasta 'dist'
+
+  # Tarefa 2: Fazer o deploy do artefato no GitHub Pages
+  deploy:
+    # Esta tarefa só roda depois que a tarefa 'build' for concluída com sucesso
+    needs: build
+    
+    # Configurações do ambiente de deploy
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # Define a URL do site nos logs
+
+    runs-on: ubuntu-latest
+    steps:
+      # 7. Ação oficial para fazer o deploy no GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
