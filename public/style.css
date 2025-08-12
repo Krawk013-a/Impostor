@@ -1,0 +1,153 @@
+/* Estilos Gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#main-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Esconde todas as telas por padrão */
+.screen {
+    display: none;
+}
+
+/* Mostra a tela ativa */
+.screen.active {
+    display: block;
+}
+
+/* Títulos e Textos */
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: #34495e;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+}
+
+/* Entradas e Botões */
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+#start-game-btn, #play-again-btn {
+    background-color: #2ecc71;
+}
+#start-game-btn:hover, #play-again-btn:hover {
+    background-color: #27ae60;
+}
+
+
+.join-room-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+/* Listas */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+#player-list li, #clue-list li, #final-clues-list li {
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Seções do Jogo */
+#role-info, #theme-info {
+    background-color: #e8f4fd;
+    color: #2980b9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+#clue-input-container {
+    margin-top: 1rem;
+}
+
+#turn-info {
+    color: #e67e22;
+}
+
+/* Votação */
+#voting-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Mensagens de Erro */
+.error-message {
+    color: #e74c3c;
+    margin-top: 1rem;
+    min-height: 1.2em;
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 600px) {
+    #main-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        padding: 1.5rem;
+        box-shadow: none;
+    }
+    .join-room-container {
+        flex-direction: column;
+    }
+}

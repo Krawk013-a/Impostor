@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impostor: Jogo Palavras Party</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="main-container">
+
+        <div id="home-screen" class="screen active">
+            <h1>Impostor</h1>
+            <p class="subtitle">Jogo de Palavras em Grupo</p>
+            <input type="text" id="player-name-input" placeholder="Digite seu nome" maxlength="15">
+            <button id="create-room-btn">Criar Sala</button>
+            <div class="join-room-container">
+                <input type="text" id="room-code-input" placeholder="Código da sala">
+                <button id="join-room-btn">Entrar</button>
+            </div>
+            <p id="home-error" class="error-message"></p>
+        </div>
+
+        <div id="lobby-screen" class="screen">
+            <h2>Sala: <span id="room-code-display"></span></h2>
+            <p>Compartilhe o código com seus amigos!</p>
+            <h3>Jogadores na Sala:</h3>
+            <ul id="player-list"></ul>
+            <button id="start-game-btn">Iniciar Jogo</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div id="role-info">
+                Sua palavra é: <strong id="word-display"></strong>
+            </div>
+            <div id="theme-info">
+                O tema é: <strong id="theme-display"></strong>
+            </div>
+            <h3 id="turn-info">Aguardando início...</h3>
+            <div id="clue-input-container">
+                <input type="text" id="clue-input" placeholder="Digite sua dica (1 palavra)">
+                <button id="submit-clue-btn">Enviar Dica</button>
+            </div>
+            <div id="clues-area">
+                <h4>Dicas da Rodada:</h4>
+                <ul id="clue-list"></ul>
+            </div>
+        </div>
+
+        <div id="voting-screen" class="screen">
+            <h2>Hora de Votar!</h2>
+            <p>Quem você acha que é o impostor?</p>
+            <div id="voting-buttons"></div>
+        </div>
+        
+        <div id="end-screen" class="screen">
+            <h2 id="end-title">Fim da Rodada!</h2>
+            <p id="end-subtitle"></p>
+            <div id="end-details">
+                <p>O impostor era: <strong id="impostor-was"></strong></p>
+                <p>A palavra secreta era: <strong id="secret-word-was"></strong></p>
+                <h4>Dicas dadas:</h4>
+                <ul id="final-clues-list"></ul>
+            </div>
+            <div id="impostor-guess-box" class="screen">
+                <h3>Última Chance, Impostor!</h3>
+                <p>Adivinhe a palavra secreta para roubar a vitória!</p>
+                <input type="text" id="impostor-guess-input" placeholder="Qual era a palavra?">
+                <button id="submit-guess-btn">Adivinhar</button>
+            </div>
+            <button id="play-again-btn">Jogar Novamente</button>
+        </div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
