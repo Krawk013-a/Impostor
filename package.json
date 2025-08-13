@@ -4,7 +4,7 @@
   "description": "Jogo de dedução social com palavras",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "/api/node server.js"
   },
   "author": "Gemini AI",
   "license": "ISC",
